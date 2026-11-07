@@ -3,3 +3,5 @@ dist/
 .env
 # never commit bot tokens or chat ids
 config.json
+build/
+*.mcpb

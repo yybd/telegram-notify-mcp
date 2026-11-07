@@ -43,11 +43,17 @@ function readFileConfig(): Partial<Config> {
   }
 }
 
+/** An env var, ignoring empty values and placeholders a host left unfilled (Claude Desktop's ${user_config.x}). */
+function env(name: string): string | undefined {
+  const v = process.env[name]?.trim();
+  return v && !/^\$\{.*\}$/.test(v) ? v : undefined;
+}
+
 export function loadConfig(): Config {
   const file = readFileConfig();
-  const token = (process.env.TELEGRAM_BOT_TOKEN || file.token || '').trim();
-  const chatId = (process.env.TELEGRAM_CHAT_ID || file.chatId || '').trim();
-  const filesDir = (process.env.TELEGRAM_NOTIFY_FILES_DIR || file.filesDir || '').trim() || undefined;
+  const token = (env('TELEGRAM_BOT_TOKEN') || file.token || '').trim();
+  const chatId = (env('TELEGRAM_CHAT_ID') || file.chatId || '').trim();
+  const filesDir = (env('TELEGRAM_NOTIFY_FILES_DIR') || file.filesDir || '').trim() || undefined;
   if (!token) throw new Error('TELEGRAM_BOT_TOKEN is not set. Set it, or run `telegram-notify-mcp setup`.');
   if (!validToken(token)) throw new Error('TELEGRAM_BOT_TOKEN does not look like a bot token (digits:secret).');
   if (!chatId) throw new Error('TELEGRAM_CHAT_ID is not set. Set it, or run `telegram-notify-mcp setup`.');

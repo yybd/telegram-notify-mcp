@@ -1,0 +1,64 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/mcpb/main/dist/mcpb-manifest-v0.3.schema.json",
+  "manifest_version": "0.3",
+  "name": "telegram-notify",
+  "display_name": "Telegram Notify",
+  "version": "0.1.2",
+  "description": "Lets Claude send Telegram notifications to you: one fixed chat, send-only, no polling.",
+  "long_description": "A send-only MCP server with two tools. notify sends a message to one chat fixed in this extension's settings; no tool takes a recipient, so Claude cannot message anyone else. notify_file sends a file, only from one folder you choose. It never calls getUpdates, so the same bot can keep serving another tool that polls it.",
+  "author": {
+    "name": "yybd",
+    "url": "https://github.com/yybd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yybd/telegram-notify-mcp"
+  },
+  "homepage": "https://github.com/yybd/telegram-notify-mcp#readme",
+  "documentation": "https://github.com/yybd/telegram-notify-mcp#readme",
+  "support": "https://github.com/yybd/telegram-notify-mcp/issues",
+  "license": "MIT",
+  "keywords": ["telegram", "notifications", "notify", "bot"],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/main.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/main.js"],
+      "env": {
+        "TELEGRAM_BOT_TOKEN": "${user_config.bot_token}",
+        "TELEGRAM_CHAT_ID": "${user_config.chat_id}",
+        "TELEGRAM_NOTIFY_FILES_DIR": "${user_config.files_dir}"
+      }
+    }
+  },
+  "tools": [
+    { "name": "notify", "description": "Send a message to your Telegram chat" },
+    { "name": "notify_file", "description": "Send a file from the allowed folder to your Telegram chat" }
+  ],
+  "user_config": {
+    "bot_token": {
+      "type": "string",
+      "title": "Bot token",
+      "description": "From @BotFather in Telegram (/newbot). An existing bot works, even one another tool polls.",
+      "sensitive": true,
+      "required": true
+    },
+    "chat_id": {
+      "type": "string",
+      "title": "Chat id",
+      "description": "Your numeric Telegram id (ask @userinfobot). Press Start in your bot's chat first. Every message goes here and nowhere else.",
+      "required": true
+    },
+    "files_dir": {
+      "type": "directory",
+      "title": "Folder for files (optional)",
+      "description": "The only folder notify_file may send from. Leave empty to turn file sending off.",
+      "required": false
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=20.0.0" }
+  }
+}

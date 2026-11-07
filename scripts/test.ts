@@ -68,6 +68,10 @@ const p = saveConfig({ token: TOKEN, chatId: CHAT });
 assert.equal(p, configPath());
 assert.equal(statSync(p).mode & 0o777, 0o600);
 assert.deepEqual(loadConfig(), { token: TOKEN, chatId: CHAT, filesDir: undefined });
+process.env.TELEGRAM_NOTIFY_FILES_DIR = '${user_config.files_dir}'; // left unfilled by Claude Desktop
+process.env.TELEGRAM_CHAT_ID = '';
+assert.deepEqual(loadConfig(), { token: TOKEN, chatId: CHAT, filesDir: undefined });
+delete process.env.TELEGRAM_NOTIFY_FILES_DIR;
 process.env.TELEGRAM_CHAT_ID = 'not a chat';
 assert.throws(() => loadConfig(), /TELEGRAM_CHAT_ID must be/);
 delete process.env.TELEGRAM_CHAT_ID;
@@ -191,5 +195,15 @@ await stdio.connect(new StdioClientTransport({ command: 'npx', args: ['tsx', 'sr
 assert.deepEqual((await stdio.listTools()).tools.map((t) => t.name).sort(), ['notify', 'notify_file']);
 await stdio.close();
 console.log('✓ stdio server');
+
+// --- one version everywhere ---
+const pkgV = JSON.parse(readFileSync('package.json', 'utf8')).version;
+const { VERSION } = await import('../src/server.js');
+const srv = JSON.parse(readFileSync('server.json', 'utf8'));
+const man = JSON.parse(readFileSync('manifest.json', 'utf8'));
+assert.deepEqual([VERSION, srv.version, srv.packages[0].version, man.version], [pkgV, pkgV, pkgV, pkgV]);
+assert.deepEqual(Object.keys(man.user_config).sort(), ['bot_token', 'chat_id', 'files_dir']);
+assert.equal(man.user_config.bot_token.sensitive, true);
+console.log('✓ versions match (package, server, server.json, manifest.json)');
 
 console.log('\nall offline tests passed');

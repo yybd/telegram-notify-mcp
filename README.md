@@ -71,7 +71,9 @@ To send without a permission prompt each time, allow the tool in `~/.claude/sett
 
 ### Claude Desktop
 
-In `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+**One click (recommended):** download `telegram-notify-<version>.mcpb` from the [latest release](https://github.com/yybd/telegram-notify-mcp/releases/latest) and double-click it, or drag it onto **Settings → Extensions** in Claude Desktop. Desktop asks for the bot token (stored as a secret), the chat id and, optionally, the folder for files, then installs it. Nothing else is needed: Desktop runs the extension with its own Node.js, and you don't need `setup`.
+
+**Or by hand:** in `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
 
 ```json
 {
@@ -119,6 +121,8 @@ npm test
 ```
 
 The tests run offline, with `fetch` mocked. They check that `getUpdates` is never called, that a smuggled `chat_id` is ignored, that the file sandbox rejects `..`, absolute paths and symlinks, that the token is redacted from errors, and that long text is split.
+
+`./scripts/pack-mcpb.sh` builds the Claude Desktop extension, `telegram-notify-<version>.mcpb`, from `manifest.json`, `dist/` and the production dependencies.
 
 **Layout:**
 - `src/config.ts` — environment and config file

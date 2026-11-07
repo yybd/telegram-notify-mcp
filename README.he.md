@@ -71,7 +71,9 @@ claude mcp add telegram-notify -s user -e TELEGRAM_BOT_TOKEN="123456789:AAExampl
 
 ### Claude Desktop
 
-ב-`~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) או `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+**בלחיצה אחת (מומלץ):** הורד את `telegram-notify-<version>.mcpb` מה-[Release האחרון](https://github.com/yybd/telegram-notify-mcp/releases/latest) ולחץ עליו פעמיים, או גרור אותו אל **Settings ← Extensions** ב-Claude Desktop. ‏Desktop מבקש את טוקן הבוט (נשמר כסוד), את ה-chat id ובאופן אופציונלי את תיקיית הקבצים, ומתקין. לא צריך שום דבר נוסף: Desktop מריץ את התוסף עם Node.js משלו, ולא צריך `setup`.
+
+**או ידנית:** ב-`~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) או `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
 
 ```json
 {
@@ -119,6 +121,8 @@ npm test
 ```
 
 הבדיקות רצות בלי רשת, עם `fetch` מדומה. הן בודקות ש-`getUpdates` לא נקרא אף פעם, ש-`chat_id` שהוברח מתעלמים ממנו, שארגז החול של הקבצים דוחה `..`, נתיבים מוחלטים וקישורים סימבוליים, שהטוקן מוסר משגיאות, ושטקסט ארוך מתפצל.
+
+`./scripts/pack-mcpb.sh` בונה את תוסף Claude Desktop, `telegram-notify-<version>.mcpb`, מתוך `manifest.json`, `dist/` והתלויות של זמן ריצה.
 
 ## רישיון
 

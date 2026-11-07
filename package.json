@@ -1,6 +1,6 @@
 {
   "name": "@yybd/telegram-notify-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "mcpName": "io.github.yybd/telegram-notify-mcp",
   "description": "Send-only MCP server: lets Claude send Telegram notifications to one fixed chat. No polling, no recipient override.",
   "license": "MIT",

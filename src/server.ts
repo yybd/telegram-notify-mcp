@@ -5,7 +5,7 @@ import { z } from 'zod';
 import type { Config } from './config.js';
 import { redact, sendFile, sendText } from './telegram.js';
 
-export const VERSION = '0.1.1';
+export const VERSION = '0.1.2';
 
 const INSTRUCTIONS = `Sends Telegram notifications to the owner of this server — one fixed chat, set in its configuration.
 - notify: a short message when something finishes, fails, or needs the user's attention. Plain text by default; format="markdown" for **bold**, _italic_, \`code\`, links. silent=true delivers without a sound.
