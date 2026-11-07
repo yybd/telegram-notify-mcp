@@ -8,6 +8,8 @@ A small, **send-only** MCP server that lets Claude (or any MCP client) send **Te
 - **Never polls.** It calls `sendMessage`, `sendDocument` and `getMe`, and never `getUpdates`. The same bot can keep serving another tool that polls it (for example the Claude Code Telegram channel plugin) with no `409 Conflict`, and nothing expires after 24 hours.
 - **Two tools**, no Telegram library, two runtime dependencies (the MCP SDK and zod).
 
+The story behind it, with the comparison against eight other Telegram MCP servers: **[Let Claude message you on Telegram, and only you](https://www.bdtech.app/blog/telegram-notify?utm_source=github)**.
+
 ## Tools
 
 | Tool | What it does |
