@@ -1,0 +1,56 @@
+{
+  "name": "@yybd/telegram-notify-mcp",
+  "version": "0.1.0",
+  "mcpName": "io.github.yybd/telegram-notify-mcp",
+  "description": "Send-only MCP server: lets Claude send Telegram notifications to one fixed chat. No polling, no recipient override.",
+  "license": "MIT",
+  "author": "yybd",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yybd/telegram-notify-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "telegram",
+    "notifications",
+    "claude",
+    "bot"
+  ],
+  "type": "module",
+  "bin": {
+    "telegram-notify-mcp": "dist/main.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "tsx src/main.ts",
+    "test": "tsx scripts/test.ts",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.he.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/yybd/telegram-notify-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/yybd/telegram-notify-mcp/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

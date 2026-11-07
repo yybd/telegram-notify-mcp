@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.yybd/telegram-notify-mcp",
+  "title": "telegram-notify",
+  "description": "Send-only Telegram notifications to one fixed chat. No polling, no recipient override, 2 tools.",
+  "repository": {
+    "url": "https://github.com/yybd/telegram-notify-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://github.com/yybd/telegram-notify-mcp#readme",
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@yybd/telegram-notify-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "TELEGRAM_BOT_TOKEN",
+          "description": "Bot token from @BotFather (or run `telegram-notify-mcp setup` to save it to a file instead)",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "TELEGRAM_CHAT_ID",
+          "description": "The one chat that receives every message; tools cannot change it",
+          "isRequired": true,
+          "format": "string"
+        },
+        {
+          "name": "TELEGRAM_NOTIFY_FILES_DIR",
+          "description": "Folder notify_file may send from. Unset means file sending is off",
+          "isRequired": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
