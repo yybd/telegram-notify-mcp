@@ -5,10 +5,11 @@ import { z } from 'zod';
 import type { Config } from './config.js';
 import { redact, sendFile, sendText } from './telegram.js';
 
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.1';
 
 const INSTRUCTIONS = `Sends Telegram notifications to the owner of this server — one fixed chat, set in its configuration.
 - notify: a short message when something finishes, fails, or needs the user's attention. Plain text by default; format="markdown" for **bold**, _italic_, \`code\`, links. silent=true delivers without a sound.
+- Write plain words: no emoji or icons in the text or captions.
 - notify_file: sends a file, only from the folder the owner allowed.
 - This is one-way: replies in Telegram never come back here. Do not ask the user a question through it and wait for an answer.`;
 
@@ -24,7 +25,7 @@ export function createServer(cfg: Config): McpServer {
     {
       title: 'Send a Telegram notification',
       description:
-        "Sends a message to the owner's Telegram (a fixed chat; you cannot choose the recipient). Messages over 4096 characters are split.",
+        "Sends a message to the owner's Telegram (a fixed chat; you cannot choose the recipient). Messages over 4096 characters are split. Do not use emoji or icons.",
       inputSchema: {
         text: z.string().min(1).max(40_000).describe('The message'),
         silent: z.boolean().optional().describe('Deliver without a notification sound'),

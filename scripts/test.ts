@@ -174,6 +174,12 @@ for (const f of readdirSync('src')) {
 }
 console.log('✓ never calls getUpdates');
 
+// --- the messages the CLI itself sends carry no emoji ---
+const cliSends = readFileSync('src/cli.ts', 'utf8').split('\n').filter((l) => l.includes('sendText('));
+assert.ok(cliSends.length >= 2);
+for (const l of cliSends) assert.ok(!/\p{Extended_Pictographic}/u.test(l), l);
+console.log('✓ no emoji in messages the CLI sends');
+
 // --- stdio: refuses to start without config, never prints the token ---
 const env = { ...process.env, TELEGRAM_NOTIFY_HOME: join(work, 'empty') } as Record<string, string>;
 delete env.TELEGRAM_BOT_TOKEN;

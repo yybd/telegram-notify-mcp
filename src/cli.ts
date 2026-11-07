@@ -50,14 +50,14 @@ async function setup() {
   if (dir && !existsSync(dir)) throw new Error(`--files-dir: ${dir} does not exist`);
   const p = saveConfig({ token, chatId, filesDir: dir ? resolve(dir) : undefined });
   console.log(`   ✓ saved ${p} (mode 600)`);
-  await sendText({ token, chatId }, `✅ telegram-notify is set up. Notifications from your MCP clients will arrive here.`);
+  await sendText({ token, chatId }, `telegram-notify is set up. Notifications from your MCP clients will arrive here.`);
   console.log('   ✓ test message sent — check Telegram.');
 }
 
 async function test() {
   const cfg = loadConfig();
   const me = await getMe(cfg);
-  await sendText(cfg, `🔔 telegram-notify test from @${me.username} — ${new Date().toISOString()}`);
+  await sendText(cfg, `telegram-notify test from @${me.username} — ${new Date().toISOString()}`);
   console.log(`✓ sent a test message through @${me.username}${cfg.filesDir ? ` (file sending: ${cfg.filesDir})` : ' (file sending: off)'}`);
 }
 
