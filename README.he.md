@@ -49,15 +49,23 @@ npx -y @yybd/telegram-notify-mcp test
 
 ### Claude Code
 
+**מומלץ:** קודם `setup` (ראה למעלה), ואחר כך הוספת השרת בלי סודות בשורת הפקודה:
+
 ```bash
 claude mcp add telegram-notify -s user -- npx -y @yybd/telegram-notify-mcp
 ```
 
-עם משתני סביבה במקום `setup`:
+כך הטוקן נשאר ב-`~/.telegram-notify/config.json` (הרשאות `600`) ולא נכנס ל-`~/.claude.json`.
+
+**או עם משתני סביבה** במקום `setup`. החלף את ערכי הדוגמה בשלך והשאר את המרכאות. אל תקליד סוגריים משולשים כמו `<token>`: המעטפת קוראת את `<` כ"קרא מקובץ", והפקודה נכשלת עם `no such file or directory`.
 
 ```bash
-claude mcp add telegram-notify -s user -e TELEGRAM_BOT_TOKEN=<token> -e TELEGRAM_CHAT_ID=<chat id> -- npx -y @yybd/telegram-notify-mcp
+claude mcp add telegram-notify -s user -e TELEGRAM_BOT_TOKEN="123456789:AAExampleTokenFromBotFather" -e TELEGRAM_CHAT_ID="987654321" -- npx -y @yybd/telegram-notify-mcp
 ```
+
+בדרך הזו הטוקן נשמר ב-`~/.claude.json`.
+
+השרת מופיע בסשנים חדשים; סשן שכבר פתוח לא רואה אותו.
 
 כדי לשלוח בלי בקשת אישור בכל פעם, אשר את הכלי ב-`~/.claude/settings.json`: `"permissions": { "allow": ["mcp__telegram-notify__notify"] }`. זה בטוח בזכות הנמען הקבוע: הגרוע ביותר שמודל מבולבל יכול לעשות הוא לשלוח הודעה אליך.
 

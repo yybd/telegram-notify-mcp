@@ -49,15 +49,23 @@ npx -y @yybd/telegram-notify-mcp test
 
 ### Claude Code
 
+**Recommended:** run `setup` first (see above), then add the server with no secrets on the command line:
+
 ```bash
 claude mcp add telegram-notify -s user -- npx -y @yybd/telegram-notify-mcp
 ```
 
-With environment variables instead of `setup`:
+The token then stays in `~/.telegram-notify/config.json` (mode `600`) and out of `~/.claude.json`.
+
+**Or with environment variables** instead of `setup`. Replace the example values with yours and keep the quotes. Don't type angle brackets such as `<token>`: the shell reads `<` as "read from a file" and the command fails with `no such file or directory`.
 
 ```bash
-claude mcp add telegram-notify -s user -e TELEGRAM_BOT_TOKEN=<token> -e TELEGRAM_CHAT_ID=<chat id> -- npx -y @yybd/telegram-notify-mcp
+claude mcp add telegram-notify -s user -e TELEGRAM_BOT_TOKEN="123456789:AAExampleTokenFromBotFather" -e TELEGRAM_CHAT_ID="987654321" -- npx -y @yybd/telegram-notify-mcp
 ```
+
+This stores the token in `~/.claude.json`.
+
+New sessions pick up the server; one that is already open doesn't.
 
 To send without a permission prompt each time, allow the tool in `~/.claude/settings.json`: `"permissions": { "allow": ["mcp__telegram-notify__notify"] }`. That is safe because of the fixed recipient: the worst a confused model can do is message you.
 
