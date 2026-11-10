@@ -1,5 +1,12 @@
 *English · [עברית](README.he.md)*
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/wordmark-dark.svg">
+    <img src="docs/assets/wordmark-light.svg" alt="telegram-notify MCP" width="520">
+  </picture>
+</p>
+
 # telegram-notify MCP
 
 A small, **send-only** MCP server that lets Claude (or any MCP client) send **Telegram notifications to you**: a scheduled job finished, a long build failed, a reminder came due.

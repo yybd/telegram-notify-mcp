@@ -1,5 +1,12 @@
 *[English](README.md) · עברית*
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/wordmark-dark.svg">
+    <img src="docs/assets/wordmark-light.svg" alt="telegram-notify MCP" width="520">
+  </picture>
+</p>
+
 # telegram-notify MCP
 
 שרת MCP קטן **לשליחה בלבד**, שמאפשר ל-Claude (ולכל לקוח MCP) לשלוח **אליך התראות בטלגרם**: משימה מתוזמנת הסתיימה, בנייה ארוכה נכשלה, הגיע זמן תזכורת.

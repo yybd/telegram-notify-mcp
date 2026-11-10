@@ -6,6 +6,7 @@
   "version": "0.1.2",
   "description": "Lets Claude send Telegram notifications to you: one fixed chat, send-only, no polling.",
   "long_description": "A send-only MCP server with two tools. notify sends a message to one chat fixed in this extension's settings; no tool takes a recipient, so Claude cannot message anyone else. notify_file sends a file, only from one folder you choose. It never calls getUpdates, so the same bot can keep serving another tool that polls it.",
+  "icon": "icon.png",
   "author": {
     "name": "yybd",
     "url": "https://github.com/yybd"
